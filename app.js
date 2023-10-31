@@ -176,7 +176,7 @@ const UIController = (function (){
         clearWarnings : function() {
             const list = document.querySelectorAll(Selectors.productListItems)
             list.forEach(function(tr){
-                if(tr.contains("bg-warning")){
+                if(tr.classList.contains("bg-warning")){
                     tr.classList.remove("bg-warning")
                 }
             });
@@ -211,6 +211,7 @@ const UIController = (function (){
         },
 
         addingState : function () {
+            UIController.clearWarnings()
             UIController.clearInputs()
             document.querySelector(Selectors.addBtn).style.display = "inline";
             document.querySelector(Selectors.saveBtn).style.display = "none";
@@ -333,7 +334,6 @@ const App = (function (ProductCtrl, UICtrl){
 
             // show total
             UICtrl.showTotal(total)
-
             UICtrl.clearWarnings()
             UICtrl.addingState(item)
         }
@@ -343,9 +343,8 @@ const App = (function (ProductCtrl, UICtrl){
 
     const cancelUpdate = function (e) {
         
-        UICtrl.clearWarnings()
         UICtrl.addingState()
-        
+        UICtrl.clearWarnings()
         e.preventDefault()
     }
 
